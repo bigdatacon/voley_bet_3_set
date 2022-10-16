@@ -93,12 +93,7 @@ def pred_obr_base(i): # на вход строка из json
     data = i
     set_1 = [float(x) for x in data['set1']]
     set_2 = [float(x) for x in data['set2']]
-    # 'kf1_1': '1,78', 'kf2_1': '1,92', 'kf1_2': '1,85', 'kf2_2': '1,85', 'kf1_3': '1,65', 'kf2_3'
 
-    # data['kf1_1'] = float(data['kf1_1'].replace(',', '.'))
-    # data['kf2_1'] = float(data['kf2_1'].replace(',', '.'))
-    # data['kf1_2'] = float(data['kf1_2'].replace(',', '.'))
-    # data['kf2_2'] = float(data['kf2_2'].replace(',', '.'))
     data['kf1_3'] = float(data['kf1_3'].replace(',', '.'))
     data['kf2_3'] = float(data['kf2_3'].replace(',', '.'))
 
@@ -217,15 +212,6 @@ def pred_obr_base_aft_pars(i): # на вход строка из json - функ
     data = i
     set_1 = [float(x) for x in data['set1']]
     set_2 = [float(x) for x in data['set2']]
-    # 'kf1_1': '1,78', 'kf2_1': '1,92', 'kf1_2': '1,85', 'kf2_2': '1,85', 'kf1_3': '1,65', 'kf2_3'
-
-    # data['kf1_1'] = float(data['kf1_1'].replace(',', '.'))
-    # data['kf2_1'] = float(data['kf2_1'].replace(',', '.'))
-    # data['kf1_2'] = float(data['kf1_2'].replace(',', '.'))
-    # data['kf2_2'] = float(data['kf2_2'].replace(',', '.'))
-    # data['kf1_3'] = float(data['kf1_3'].replace(',', '.'))
-    # data['kf2_3'] = float(data['kf2_3'].replace(',', '.'))
-
     len_set_1 = data['1_set_len_set']
     len_set_2 = data['2_set_len_set']
 
