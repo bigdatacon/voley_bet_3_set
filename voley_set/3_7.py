@@ -247,8 +247,7 @@ if __name__ == '__main__':
                         while len(driver.window_handles) < 2:
                             driver.switch_to.new_window()
                             time.sleep(1)
-                        # driver.switch_to.new_window()
-                        # time.sleep(1.4)
+
 
                         driver.get(url)
                         time.sleep(5)
@@ -286,10 +285,6 @@ if __name__ == '__main__':
                                     text = item.text.split("\n")[0].replace('\u2011', '')
                                     print(f'ALARMA : здесь есть 3 сет : {text}')
                                     teams = item.find_elements(By.XPATH, './/div[@class="cell-wrap--phQzD"]')
-                                    # team_one = WebDriverWait(driver, 20).until(
-                                    #     EC.element_to_be_clickable((item.find_elements(By.XPATH, './/div[@class="cell-wrap--phQzD"]'))[0]))
-                                    # team_two = WebDriverWait(driver, 20).until(
-                                    #     EC.element_to_be_clickable((item.find_elements(By.XPATH, './/div[@class="cell-wrap--phQzD"]'))[1]))
 
                                     def get_score_kf(item):
                                         score_one = None
@@ -331,9 +326,6 @@ if __name__ == '__main__':
                                     else:
                                         try:
                                             print('пробую ставить на команду 2')
-                                            # team_two = WebDriverWait(teams[1], 20).until(EC.visibility_of_element_located(
-                                            #     (By.XPATH, './/div[contains(@class, "selectable")]')))
-                                            # team_two.click()
 
                                             index_team = int(1)
                                             if score_two is not None and score_two > 1:
@@ -378,10 +370,3 @@ if __name__ == '__main__':
                         print(f'на печать аргументы ошибки в самом эксепшн : {e.args}')
         except Exception as e:
             print(f'Эксепшн:  ошибка в самом начале : {e.args}, {e.__cause__}, {e.__context__} : {datetime.datetime.now()}')
-
-
-            # teams = item.find_elements(By.XPATH, './/div[@class="cell-wrap--phQzD"]')
-            # score_one  = item.find_elements(By.XPATH, './/div[@class="v--GM-zl"]')[0].text
-            # score_two = item.find_elements(By.XPATH, './/div[@class="v--GM-zl"]')[1].text
-            # print(f' eto score_one, score_two : {float(score_one)}, {float(score_two)}')
-            # print(float(score_one)>1.5)
