@@ -185,9 +185,7 @@ def process_link_dublfirst(event_url, id):
                     break
         itog = []
         game_info = None
-        # print(f'переход по ссылке link : {driver.current_url}')
-        # dont_start_game = driver.find_elements_by_xpath(
-        #     '//div[@class="ev-comment--1GT4Y"]/div')
+
         while err<6:
             try:
                 while driver.find_elements_by_xpath('//div[@class="ev-comment--1GT4Y"]/div'):
@@ -283,9 +281,7 @@ def process_link_dublsecond(event_url, id):
                     break
         itog = []
         game_info = None
-        # print(f'переход по ссылке link : {driver.current_url}')
-        # dont_start_game = driver.find_elements_by_xpath(
-        #     '//div[@class="ev-comment--1GT4Y"]/div')
+
         while err<6:
             try:
                 while driver.find_elements_by_xpath('//div[@class="ev-comment--1GT4Y"]/div'):
@@ -293,7 +289,6 @@ def process_link_dublsecond(event_url, id):
                     time.sleep(5)
                 time.sleep(5)
 
-                # id = driver.find_elements_by_xpath('//div[@class="menu--HzLjc"]//div[@class="tab--30YXI"][last()]')[0].text #work
                 id = id
                 scor_list = driver.find_elements_by_xpath('//div[@class="ev-score--2aHgg"]') #work
                 scor_1 = scor_list[-2].text #work
@@ -365,53 +360,3 @@ def process_link_dublsecond(event_url, id):
     except Exception as e:
         print(f' {e.args} on this URL : {event_url}')
 
-""" ВНИМАНИЕ ЭТО НУМЕР КОТОРЫЙ РАНЬШЕ БЫЛ В СЕЛЕНЕ ID - работает не трогай"""
-# result_json = requests.get(
-#     "https://line510.bkfon-resources.com/live/updatesFromVersion/6043867316/ru/?5d98b5an3rcksbwdycr&sysId=1").json()
-# for i in result_json['events']:
-#     if i['num'] in [35064, 35133]:
-#         print(i)
-
-""" убрать буквы из итогового скора """
-# data = '25ИТОГ'
-# print(re.sub('[\D]+', '', data).split('-'))
-
-""" Обработка данных внутри ссылки на игру"""
-
-# result_json_my = requests.get(
-#     "https://line32.bkfon-resources.com/line/topEvents3?place=live&sysId=1&lang=ru&salt=1w80n4rp9q1ksc13uzo&supertop=4&scopeMarket=1600").json()
-#
-# result_json_my = requests.get(
-#     "https://line32.bkfon-resources.com/line/topEvents3?place=live&sysId=1&lang=ru&salt=1w80n4rp9q1ksc13uzo&supertop=4&scopeMarket=1600").json()
-# print(f' ETO ANSWER json : {pprint.pprint(result_json_my)}')
-
-# for i in result_json_my["events"]:
-#     if i['number'] == 34975:
-#         print(f' eto IGRA : {pprint.pprint(i)}')
-#         print(f' eto SCORE " {i["scoreComment"]}')
-#         print(f' eto KF " {i["scoreComment"]}')
-#         print(f" eto KEFI : {i['markets'][0]['rows']}")
-        # print(f" eto KEFI : {i['markets']['rows']['cells']}")
-
-# data = [{'isTitle': True, 'cells': [{'isTitle': True}, {'caption': 'Лайф (ж)', 'isTitle': True}, {'caption': 'Гошен (ж)', 'isTitle': True}]}, {'cells': [{'caption': 'Матч', 'isTitle': True}, {'captionAlign': 'left', 'factorId': 921, 'eventId': 29419638, 'value': 1.02}, {'captionAlign': 'left', 'factorId': 923, 'eventId': 29419638, 'value': 15}]}, {'cells': [{'caption': '4-й сет', 'isTitle': True}, {'captionAlign': 'left', 'factorId': 921, 'eventId': 29428773, 'eventKindId': 100504, 'value': 1.1}, {'captionAlign': 'left', 'factorId': 923, 'eventId': 29428773, 'eventKindId': 100504, 'value': 5.8}]}]
-# def get_kf(data):
-#     kef_list = []
-#     for i in data:
-#         if 'caption' in i['cells'][0].keys():
-#             if i['cells'][0]['caption'] == "Матч":
-#                 print(i)
-#                 for el in i['cells']:
-#                     if 'value' in el.keys():
-#                         print(el['value'])
-#                         kef_list.append(el['value'])
-#     kf_1 = kef_list[0]
-#     kf_2 = kef_list[1]
-#     return kf_1, kf_2
-#
-# print(get_kf(data))
-
-# data = "(25-23 25-23 22-25 31-33 10-15) ИТОГ"
-# print(f' eto last : {data.split()[-2]}')
-# if data.split()[-1] == 'ИТОГ':
-#     print("END GAME")
-# print(data.split()[-1])
