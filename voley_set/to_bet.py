@@ -29,18 +29,6 @@ loaded_model = pickle.load(open(filename, 'rb'))
 
 def make_itog_df(data_it):
     try:
-        # print('ЧАСТЬ 1')
-        # with open("for_analize_PRIORITET.json", "r", encoding='utf-8') as read_file:
-        #     data = json.load(read_file)
-        # print(len(data))
-        # data_it = []
-        # for i in data:
-        #     try:
-        #         if i["game"] not in data_it:
-        #             data_it.append(i["game"])
-        #     except Exception as e:
-        #         continue
-
 
         df = pd.DataFrame.from_dict(data_it, orient='columns')
 
@@ -415,55 +403,8 @@ while True:
                     X = df.drop(['event_number ', 'urls'], axis = 1)
 
                     """ставлю перечень параметров из большой модели для всех игр там больше аккураси """
-                    # X = df[
-                    #
-                    #     ['len_set_1 ',
-                    #      'len_set_2',
-                    #      '2_team_sum_len_favor_2_set',
-                    #      'first_t_sum_lens_no_l_ch_to_set_2_set',
-                    #      '2_team_otn_len_favor_2_set',
-                    #      'first_t_sum_lens_with_l_ch_to_set_2_set',
-                    #      'max_2_set',
-                    #      'modi_2_set',
-                    #      'sec_t_max_scor_with_lch_2_set',
-                    #      'first_t_sum_lens_no_l_ch_to_set_1_set',
-                    #      '1_team_max_len_favor_2_set',
-                    #      'first_t_max_scor_with_lch_2_set',
-                    #      'sec_t_lens_no_l_ch_to_len_set_2_set',
-                    #      'sec_t_sum_lens_no_l_ch_to_set_2_set',
-                    #      'pl_4toset_first_team_1_set',
-                    #      'otn_pl_2_set_2_set_1_team',
-                    #      'quant_pl_2_1_set_1_team',
-                    #      'sec_t_lens_no_l_ch_to_len_set_1_set',
-                    #      'adv_2_1_set',
-                    #      'otn_pl_2_set_1_set_2_team',
-                    #      'mean_99_1_set',
-                    #      'otn_pl_2_set_2_set_2_team',
-                    #      '1_team_max_len_favor_1_set',
-                    #      'dif_2_set',
-                    #      'sec_t_lens_with_l_ch_to_len_set_1_set',
-                    #      'pl_4toset_first_team_2_set',
-                    #      'favor',
-                    #      'sec_t_lens_with_l_ch_to_len_set_2_set',
-                    #      'sec_t_sum_lens_no_l_ch_to_set_1_set',
-                    #      'quant_teas_2_set',
-                    #      'quant_teas_1_set',
-                    #      'l_ch_1_set',
-                    #      'otn_teas_set_1_set',
-                    #      '1_team_otn_len_favor_1_set',
-                    #      '2_team_max_len_favor_1_set',
-                    #      '2_team_otn_len_favor_1_set',
-                    #      'sec_t_max_len_non_stop_goal_no_lch_2_set',
-                    #      'sec_t_max_len_non_stop_goal_no_lch_1_set',
-                    #      '1_team_otn_len_favor_2_set',
-                    #      'score_befor_3',
-                    #      'first_t_max_scor_no_lch_1_set',
-                    #      'sec_t_max_len_non_st_goal_with_l_ch_2_set'
-                    #      ]
-                    # ]
-
-
-
+                   
+                   
                     X = df[
                         ['1_set_scr_1',
                          '1_set_scr_2',
