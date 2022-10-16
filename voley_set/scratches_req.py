@@ -23,8 +23,6 @@ import requests
 import pprint
 from copy import deepcopy
 
-# 21-25 11*-5 12-21* [^а-я, a-z]  шаблон (\d+-\d+\W)|(\d+\W+\d+)
-#(22-25 19*-21) полуфинал - получилось вытащить счет
 import re
 
 def add_to_analize_prior(analize_2, game):
@@ -55,37 +53,6 @@ def add_to_analize_prior(analize_2, game):
     except Exception as e:
         print(f'problem in func add_to_analize_prior : ETOS SPIS {analize_2}, ETO GAME : {game}')
     return adding
-
-# def add_to_analize_prior(analize_2, game):
-#     adding = None
-#     try:
-#         flag = False
-#
-#         for i in analize_2:
-#             if analize_2[0]!={}:
-#                 if i.get('game').get('ids') == game['ids']:
-#                     flag= True
-#                     break
-#             continue
-#         if not flag and flag != True:
-#             if len(game.get('3_set_data')) == 1:
-#                 if game.get('3_set_data')[0].get('scores') == ['0', '0']:
-#                     print(f'len_this_game= 1 {game.get("3_set_data")}')
-#                     print(f'here 0:0 : {game.get("3_set_data")[0].get("scores")}, eto 3 set : {game.get("3_set_data")}')
-#                     adding = game
-#             for i in analize_2:
-#                 if analize_2[0]!={}:
-#                     print(f'eto len 3 seta v analize_2: {len(i.get("game").get("3_set_data"))}')
-#                     if len(i.get("game").get("3_set_data")) != 1:
-#                         print(f'ALARMA WRONG DATA FOR ANALIZE: !!  eto GAME: {i}, eto spisok {analize_2}')
-#                 continue
-#         else:
-#             adding = None
-#     except Exception as e:
-#         print(f'problem in func add_to_analize_prior : ETOS SPIS {analize_2}, ETO GAME : {game}')
-#     return adding
-
-
 
 
 def add_link_to_LINKS(IDS, LINKS):
@@ -162,17 +129,6 @@ def get_basic_info_in_beginning_v_2(result_json):
                 sport_ids.append(sport_id.get("id"))
         return sport_ids
     """предыдущая версия до того как ссылка сломалась"""
-    # def get_matсhs_id(result_json, sport_ids):
-    #     matchs_ids = []
-    #     for event in result_json["events"]:
-    #         if event.get("sportId") in sport_ids and \
-    #                 event.get("parentId"):
-    #             try:
-    #                 matchs_ids.index(event.get('parentId'))
-    #             except:
-    #                 matchs_ids.append(event.get('parentId'))
-    #     return matchs_ids
-
     def get_matсhs_id(result_json, sport_ids):
         matchs_ids = []
         for event in result_json["events"]:
@@ -295,73 +251,8 @@ def get_basic_info_in_beginning(result_json):
     itog_pred_last = union_dicts_in_begining(IDS, id_list)
     ID = get_itog_list_for_begining(itog_pred_last)
     return ID
-""" CТАРАЯ ВЕРСИЯ"""
-# def get_basic_info_in_beginning(result_json):
-#     sport_ids = []
-#     urls = []
-#     ids = []
-#     set_ids = []
-#     for sport_id in result_json["sports"]:
-#         if sport_id.get("name").split(".")[0] == "Волейбол" and sport_id.get("kind") == "segment":
-#             sport_ids.append(sport_id.get("id"))
-#
-#     IDS = []
-#     IDS_SET = []
-#
-#     for event in result_json["events"]:
-#         if event.get("sportId") in sport_ids and event.get("level") == 1:
-#             ids_dict = {'sport_ids': event.get("sportId"), 'ids': event.get("id"), 'urls': f'https://www.fonbet.ru/live/volleyball/{event.get("sportId")}/{event.get("id")}'}
-#             ids.append(event.get("id"))
-#             IDS.append(ids_dict)
-#             urls.append(f'https://www.fonbet.ru/live/volleyball/{event.get("sportId")}/{event.get("id")}')
-#         elif event.get("sportId") in sport_ids and event.get("level") == 2:
-#             # print(event.get("id"), event.get("name"))
-#             ids_set_dict = [event.get("sportId"), event.get("id")]
-#             IDS_SET.append(ids_set_dict)
-#             set_ids.append(event.get("id"))
-#
-#     list_to_filter  = IDS_SET
-#     def chek_chek(data_all, elem):
-#         flag = True
-#         for i in data_all:
-#             if i[0] == elem:
-#                 flag = False
-#         return flag
-#
-#     def process_id_set(list_to_filter):
-#         data_all = []
-#         itog = []
-#         for i in range(len(list_to_filter)):
-#             data = []
-#             elem = list_to_filter.pop(0)
-#             # print(f' eto len list : {len(list_to_filter)}, eto list : {list_to_filter}')
-#             for el in list_to_filter:
-#                 if el[0]== elem[0]:
-#                     data.append(el[1])
-#             chek = chek_chek(data_all, elem[0])
-#             if chek:
-#                 data.append(elem[1])
-#                 data_all.append([elem[0], data])
-#         for i in data_all:
-#             dicti = {'sport_ids' : i[0], 'set_ids' : i[1]}
-#             itog.append(dicti)
-#         return itog
-#
-#     id_list = process_id_set(list_to_filter)
-#
-#     def union_dicts_in_begining(IDS, id_list):
-#         for i in IDS:
-#             for j in id_list:
-#                 if i.get('sport_ids') == j.get('sport_ids'):
-#                     i['set_ids'] = j.get('set_ids')
-#         return IDS
-#
-#     itog_pred_last = union_dicts_in_begining(IDS, id_list)
-#     for i in itog_pred_last:
-#         set_id = min(i.get('set_ids'))
-#         i['set_ids'] = set_id
-#
-#     return itog_pred_last
+
+
 
 
 def dump_to_file_add(itog, filename):
@@ -508,23 +399,6 @@ def get_koefficients(result_json, set_ids):
     return [team_1_kf, team_2_kf]
 
 
-"""старая до того как сломалась ссылка """
-# def get_koefficients(result_json, set_ids):
-#     team_1_kf = -1000
-#     team_2_kf = -1000
-#     try:
-#         for k in result_json["customFactors"]:
-#             if k.get("e") == set_ids:
-#                 if k.get("f") == 921:
-#                     team_1_kf= k.get("v")
-#                 if k.get("f") == 923:
-#                     team_2_kf= k.get("v")
-#     except Exception as e:
-#         print(e.args)
-#         print(f' ИЗ ЭТИХ ДАННЫХ НЕ ПОЛУЧИЛОСЬ ВЫТАЩИТЬ КОЭФФИЦИЕНТЫ : {set_ids}, k.get("e") : {k.get("e")}, k.get("f") : {k.get("f")}')
-#         dump_to_file_add([set_ids, k.get("e"), k.get("f")], "ERR_KF.json")
-#     return [team_1_kf, team_2_kf]
-
 def process_score_list_and_set_l(set_l, scor_info):
     flag= True
     flag_new_set= True
@@ -557,7 +431,6 @@ def process_score_list_and_set_l(set_l, scor_info):
     return set_l
 
 
-""" ДУБЛЬ ФУНКЦИИ НИЖЕ (ОСТАВЛЯЕТ ПЕРВОНАЧАЛЬНЫЙ КЭФ, то что ниже меняет)Проверка - нужно ли добавлять данные в список очков и коэффициентов"""
 
 def chek_for_adding(i, score_info):
     # print(f' eto i  V начале CHEKING " {i}')
@@ -609,40 +482,6 @@ def chek_for_adding(i, score_info):
     # print(f' eto i  V KONCE CHEKING " {i}')
     return i
 
-# """ Проверка - нужно ли добавлять данные в список очков и коэффициентов"""
-# def chek_for_adding(i, score_info):
-#     try:
-#         score_info =score_info[0]
-#         # print(f' eto i CHEKING : {i}')
-#         # print(f' eto score infp : {score_info}')
-#         flag = True
-#         if len(i) == 0:
-#             i.append(score_info)
-#             flag = False
-#         for el in i:
-#             # print(f' eto EL : {el}')
-#             # print(f' eto score info scores " {score_info["scores"]}')
-#             # print(f'  eto score info KF " {score_info["koeff"]}')
-#             if type(el) is dict:
-#                 if el['scores'] == score_info['scores'] and el['koeff']==score_info['koeff']:
-#                     flag = False
-#                     break
-#         if flag:
-#             for el in i:
-#                 if type(el) is dict:
-#                     if el['scores'] == score_info['scores']:
-#                         i.remove(el)
-#                         i.append(score_info)
-#                         flag = False
-#                         break
-#         if flag:
-#             i.append(score_info)
-#     except Exception as e:
-#         print(e.args)
-#         print("f исключение в функции chek_for_adding")
-#         i = False
-#     # print(f' eto i  V KONCE CHEKING " {i}')
-#     return i
 
 """ Добавление данных в итоговый список """
 def add_to_games(data_list, game):
